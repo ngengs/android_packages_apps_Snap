@@ -1937,10 +1937,7 @@ public class CameraActivity extends Activity
         mCameraPhotoModuleRootView.setVisibility(View.GONE);
         mCameraVideoModuleRootView.setVisibility(View.GONE);
         mCameraPanoModuleRootView.setVisibility(View.GONE);
-        mCameraRootFrame.removeAllViews();
         mCurrentModuleIndex = moduleIndex;
-
-        final CameraRootView rootView;
         switch (moduleIndex) {
             case ModuleSwitcher.VIDEO_MODULE_INDEX:
                 if (mVideoModule == null) {
@@ -1948,7 +1945,7 @@ public class CameraActivity extends Activity
                     mVideoModule.init(this, mCameraVideoModuleRootView);
                 }
                 mCurrentModule = mVideoModule;
-                rootView = mCameraVideoModuleRootView;
+                mCameraVideoModuleRootView.setVisibility(View.VISIBLE);
                 break;
 
             case ModuleSwitcher.WIDE_ANGLE_PANO_MODULE_INDEX:
@@ -1957,7 +1954,7 @@ public class CameraActivity extends Activity
                     mPanoModule.init(this, mCameraPanoModuleRootView);
                 }
                 mCurrentModule = mPanoModule;
-                rootView = mCameraPanoModuleRootView;
+                mCameraPanoModuleRootView.setVisibility(View.VISIBLE);
                 break;
 
             case ModuleSwitcher.PHOTO_MODULE_INDEX:
@@ -1969,11 +1966,9 @@ public class CameraActivity extends Activity
                     mPhotoModule.init(this, mCameraPhotoModuleRootView);
                 }
                 mCurrentModule = mPhotoModule;
-                rootView = mCameraPhotoModuleRootView;
+                mCameraPhotoModuleRootView.setVisibility(View.VISIBLE);
                 break;
         }
-        mCameraRootFrame.addView(rootView);
-        rootView.setVisibility(View.VISIBLE);
 
         // Re-apply the last fitSystemWindows() run. Our views rely on this, but
         // the framework's ActionBarOverlayLayout effectively prevents this if the
